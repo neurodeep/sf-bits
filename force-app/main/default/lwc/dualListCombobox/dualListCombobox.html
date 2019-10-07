@@ -1,0 +1,89 @@
+<!--
+ - Created by @author mmorozov on 07/15/2019.
+ -->
+
+<!-- Dual List Combobox -->
+<template>
+
+    <lightning-input
+            type="search"
+            value={displayValue}
+            label={label}
+            onfocus={onShowModal}
+    ></lightning-input>
+
+    <c-modal>
+        <div slot="header">
+            <lightning-layout vertical-align="center">
+
+                <lightning-layout-item>
+                    <lightning-icon icon-name="standard:search"></lightning-icon>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="horizontal-small">
+                    <span>{label}</span>
+                </lightning-layout-item>
+
+            </lightning-layout>
+        </div>
+
+        <lightning-layout multiple-rows="true" vertical-align="center">
+
+            <lightning-layout-item size="12">
+                <lightning-input
+                        type="search"
+                        value={filter}
+                        label={labels.search}
+                        placeholder={labels.search}
+                        variant="label-hidden"
+                        onchange={onSearch}
+                ></lightning-input>
+            </lightning-layout-item>
+
+            <!-- TODO: Full Search is not available in the AR package
+            <lightning-layout-item size="12">
+                <lightning-input
+                        type="checkbox"
+                        value={isFullSearch}
+                        checked={isFullSearch}
+                        label={labels.fullSearch}
+                        onchange={onFullSearch}
+                ></lightning-input>
+            </lightning-layout-item>
+            -->
+
+            <lightning-layout-item size="12">
+                <lightning-dual-listbox
+                        options={options}
+                        value={selected}
+                        label={labels.selectOptions}
+                        source-label={labels.available}
+                        selected-label={labels.selected}
+                        onchange={onChange}
+                ></lightning-dual-listbox>
+            </lightning-layout-item>
+
+        </lightning-layout>
+
+        <div slot="footer">
+            <lightning-button-group>
+
+                <lightning-button
+                        title={labels.cancel}
+                        label={labels.cancel}
+                        variant="neutral"
+                        onclick={onCancel}
+                ></lightning-button>
+
+                <lightning-button
+                        title={labels.save}
+                        label={labels.save}
+                        variant="brand"
+                        onclick={onSave}
+                ></lightning-button>
+
+            </lightning-button-group>
+        </div>
+    </c-modal>
+
+</template>
